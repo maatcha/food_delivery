@@ -10,5 +10,6 @@ class MealView
 
 	def ask_user_for_price
 		puts "Wich is that new meal's price ?"
+		gets.chomp
 	end
 end
