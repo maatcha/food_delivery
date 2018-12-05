@@ -1,10 +1,10 @@
 class Router
 
-	def initialize(meal_controller, employee_controller, customer_controller, order_controller)
-		@meal_controller = meal_controller
-		# @employee_controller = employee_controller
-		# @customer_controller = customer_controller
-		# @order_controller = order_controller
+	def initialize(meals_controller, customers_controller, employees_controller, orders_controller)
+		@meals_controller = meals_controller
+		@customers_controller = customers_controller
+		# @employees_controller = employees_controller
+		# @orders_controller = orders_controller
 	end
 
 	def run
@@ -20,13 +20,17 @@ class Router
 		puts "What're you gonna do ?"
 		puts "1 - Display meals"
 		puts "2 - Add a new meals"
+		puts "3 - Display customers"
+		puts "4 - Add a new customer"
 		puts "---"
 	end
 
 	def dispatch(action)
 		case action
-		when 1 then @meal_controller.list
-		when 2 then @meal_controller.add
+		when 1 then @meals_controller.list
+		when 2 then @meals_controller.add
+		when 3 then @customers_controller.list
+		when 4 then @customers_controller.add
 		else
 			puts "Hum, wrong action...try again !"
 		end

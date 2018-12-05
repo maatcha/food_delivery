@@ -1,11 +1,11 @@
 require "csv"
 require "pry"
-csv_file = "meals.csv"
+csv_file = "customers.csv"
 
-class MealRepository
-
+class CustomerRepository
+	
 	def initialize(csv_file)
-		@meals = []
+		@customers = []
 		@csv_file = csv_file
 		@csv_options = { col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }
 		load_csv
@@ -14,23 +14,23 @@ class MealRepository
 	def load_csv
 		CSV.foreach(@csv_file, @csv_options) do |row|
 			row["id"] = row["id"].to_i
-			meal = Meal.new(
+			customer = Customer.new(
 				id: row["id"], name: row["name"], price: row["price"])
-			@meals << meal
+			@customers << customer
 		end
 	end
-
-	def add_meal(meal)
-		meal.id = @meals.empty? ? 1 : @meals.last.id + 1
-		@meals << meal
+	
+	def add_customer(customer)
+		customer.id = @customers.empty? ? 1 : @customers.last.id + 1
+		@customers << customer
 		write_csv
 	end
 
 	def write_csv
 		CSV.open(@csv_file, "w") do |csv|
-			csv << ["id", "name", "price"]
-			@meals.each do |meal|
-				csv << [meal.id, meal.name, meal.price]
+			csv << ["id", "name", "adress"]
+			@customers.each do |customer|
+				csv << [customer.id, customer.name, customer.adress]
 			end
 		end
 	end
