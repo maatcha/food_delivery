@@ -16,6 +16,6 @@ class MealsController
 		name = @meals_view.ask_user_for_name
 		price = @meals_view.ask_user_for_price
 		meal = Meal.new(attributes = {name: name, price: price})
-		@meal_repository.add_meal(meal)
+		@meal_repository.add(meal)
 	end
 end

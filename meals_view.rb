@@ -1,9 +1,11 @@
 class MealsView
 
 	def display
+		puts "\n---"
 		CSV.foreach("meals.csv", {col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }) do |row|
 			puts "#{row["id"]} - #{row["name"]} : #{row["price"]}"
 		end
+		puts "---"
 	end
 
 	def ask_user_for_name
