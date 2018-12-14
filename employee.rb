@@ -4,8 +4,12 @@ class Employee
 
 	def initialize(attributes = {})
 		@id = attributes[:id]
-		@name = attributes[:username]
+		@username = attributes[:username]
 		@password = attributes[:password]
 		@role = attributes[:role]
 	end
+
+	def manager?
+    	@role == "manager" #return boolean
+  	end
 end

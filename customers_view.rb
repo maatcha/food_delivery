@@ -1,20 +1,12 @@
-class CustomersView
+require_relative "base_view"
 
-	def display		
+class CustomersView < BaseView
+
+	def display(customers)
 		puts "\n---"
-		CSV.foreach("customers.csv", {col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }) do |row|
-			puts "#{row["id"]} - #{row["name"]} : #{row["adress"]}"
+		customers.each do |customer|
+		puts "#{customer.id} - #{customer.name} : #{customer.adress}"
 		end
 		puts "---"
-	end
-
-	def ask_user_for_name
-		puts "What's this customer'name ?"
-		gets.chomp
-	end
-
-	def ask_user_for_adress
-		puts "What's his adress ?"
-		gets.chomp
 	end
 end

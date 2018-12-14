@@ -1,4 +1,6 @@
 require_relative "base_repository"
+require_relative "order_repository"
+require_relative "orders_controller"
 require_relative "employee_repository"
 require_relative "employees_controller"
 require_relative "meal_repository"
@@ -16,6 +18,8 @@ customers_controller = CustomersController.new(customer_repository)
 employee_repository = EmployeeRepository.new("employees.csv", "Employee")
 employees_controller = EmployeesController.new(employee_repository)
 
-router = Router.new(meals_controller, customers_controller, employees_controller, orders_controller = nil)
-employee_role = router.login
-router.run(employee_role)
+order_repository = OrderRepository.new("orders.csv", "Order")
+orders_controller = OrdersController.new(order_repository, customer_repository, employee_repository)
+
+router = Router.new(meals_controller, customers_controller, employees_controller, orders_controller)
+router.run

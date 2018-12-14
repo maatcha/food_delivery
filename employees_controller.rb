@@ -9,17 +9,20 @@ class EmployeesController
 	end
 
 	def list
-		@employees_view.display
+		employees = @employee_repository.all
+		@employees_view.display(employees)
 	end
 
 	def login
-		username = @employees_view.ask_user_for_name
-		password = @employees_view.ask_user_for_password
-		check_password = @employee_repository.check_password(username, password)
-		if check_password == "manager"
-			return "manager"
-		elsif check_password == "delivery_guy"
-			return "delivery_guy"
+		username = @employees_view.ask_for(:username)
+		password = @employees_view.ask_for(:password)
+		employee = @employee_repository.find_by_username(username)
+		if employee && employee.password == password
+			@employees_view.logged_successfully(employee)
+			return employee
+		else
+			@employees_view.wrong_credentials
+			login
 		end
 	end
 end

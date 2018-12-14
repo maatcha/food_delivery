@@ -9,12 +9,13 @@ class MealsController
 	end
 
 	def list
-		@meals_view.display
+		meals = @meal_repository.all
+		@meals_view.display(meals)
 	end
 
 	def add
-		name = @meals_view.ask_user_for_name
-		price = @meals_view.ask_user_for_price
+		name = @meals_view.ask_for(:name)
+		price = @meals_view.ask_for(:price)
 		meal = Meal.new(attributes = {name: name, price: price})
 		@meal_repository.add(meal)
 	end

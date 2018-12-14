@@ -1,20 +1,12 @@
-class MealsView
+require_relative "base_view"
 
-	def display
+class MealsView < BaseView
+
+	def display(meals)
 		puts "\n---"
-		CSV.foreach("meals.csv", {col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }) do |row|
-			puts "#{row["id"]} - #{row["name"]} : #{row["price"]}"
+		meals.each do |meal|
+		puts "#{meal.id} - #{meal.name} : #{meal.price}"
 		end
 		puts "---"
-	end
-
-	def ask_user_for_name
-		puts "Wich is that new meal's name ?"
-		gets.chomp
-	end
-
-	def ask_user_for_price
-		puts "Wich is that new meal's price ?"
-		gets.chomp
 	end
 end

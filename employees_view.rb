@@ -1,24 +1,24 @@
-class EmployeesView
+require_relative "base_view"
+
+class EmployeesView < BaseView
 	
-	def display
+	def display(employees)
 		puts "\n---"
-		CSV.foreach("employees.csv", {col_sep: ",", force_quotes: false, headers: :first_row, quote_char: "|" }) do |row|
-			puts "#{row["id"]} - #{row["username"]} ; #{row["password"]} : #{row["role"]}"
+		employees.each do |employee|
+		puts "#{employee.id} - #{employee.username}"
 		end
 		puts "---"
 	end
 
-	def ask_user_for_name
-		puts "What's your name ?"
-		gets.chomp
+	def logged_successfully(employee)
+		if employee.manager?
+			puts "[MANAGER] Welcome #{employee.username}!"
+		else
+			puts "[DELIVERY GUY] Welcome #{employee.username}!"
+		end
 	end
 
-	def ask_user_for_password
-		puts "Password ?"
-		gets.chomp
-	end
-
-	def say_hello(username)
-		puts "Welcome to you #{username} !"
+	def wrong_credentials
+		puts "Wrong credentials... Try again !"
 	end
 end

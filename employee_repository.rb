@@ -1,12 +1,10 @@
 class EmployeeRepository < BaseRepository
 
-	def check_password(username, password)
-		CSV.foreach(@csv_file, @csv_options) do |row|
-			if username == row["username"] && password == row["password"]
-				return row["role"]
-			end
-		end
+	def find_by_username(username)
+		@array.find{|employee| employee.username == username}
 	end
-	# return "manager_logged_in"
-	# return "delivery_guy_logged_in"
+
+	def find_by_id(employee_id)
+		@array.find{|employee| employee.id == employee_id.to_i}
+	end
 end 
