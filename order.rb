@@ -1,6 +1,6 @@
+require "pry"
 class Order
-	attr_accessor :id, :employee_name, :customer_name, :customer_adress, :meal
-	attr_reader :delivered
+	attr_accessor :id, :employee_name, :customer_name, :customer_adress, :meal, :delivered
 
 	def initialize(attributes = {})
 		@id = attributes[:id]
@@ -11,7 +11,7 @@ class Order
 		@delivered = attributes[:delivered] || false
 	end
 
-	def delivered!
-		delivered = true
+	def delivered!(order_to_mark)
+		order_to_mark.delivered = true
 	end
 end

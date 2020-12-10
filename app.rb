@@ -18,8 +18,8 @@ customers_controller = CustomersController.new(customer_repository)
 employee_repository = EmployeeRepository.new("employees.csv", "Employee")
 employees_controller = EmployeesController.new(employee_repository)
 
-order_repository = OrderRepository.new("orders.csv", "Order")
-orders_controller = OrdersController.new(order_repository, customer_repository, employee_repository)
+order_repository = OrderRepository.new("orders.csv", "Order",employee_repository)
+orders_controller = OrdersController.new(order_repository, customer_repository, employee_repository, meal_repository)
 
 router = Router.new(meals_controller, customers_controller, employees_controller, orders_controller)
 router.run

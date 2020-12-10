@@ -35,16 +35,18 @@ class Router
 		puts "\n---"
 		puts "What're you gonna do ?"
 		puts "1 - Display my undelivered orders"
-		puts "2 - Sign out"
-		puts "3 - Exit"
+		puts "2 - Mark an order as delivered"		
+		puts "3 - Sign out"
+		puts "4 - Exit"
 		puts "---"
 	end
 	
 	def dispatch_delivery_guy_action(action, delivery_guy)
 		case action
 		when 1 then @orders_controller.list(delivery_guy)
-		when 2 then @employee = nil
-		when 3
+		when 2 then @orders_controller.mark_as_delivered		
+		when 3 then @employee = nil
+		when 4
 			@employee = nil
 			@running = false
 		else

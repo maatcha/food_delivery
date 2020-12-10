@@ -22,8 +22,6 @@ class BaseRepository
 		write_csv
 	end
 
-	private
-
 	def load_csv
 		CSV.foreach(@csv_file, @csv_options) do |row|
 			row["id"] = row["id"].to_i
@@ -45,18 +43,18 @@ class BaseRepository
 		CSV.open(@csv_file, "w") do |csv|
 			if @klass == "Customer"
 				csv << ["id", "name", "adress"]
+				@array.each do |meal_or_customer_or_order|
+						csv << [meal_or_customer_or_order.id, meal_or_customer_or_order.name, meal_or_customer_or_order.adress]
+				end
 			elsif @klass == "Meal"
 				csv << ["id", "name", "price"]
-			else
-				csv << ["id", "meal", "employee", "customer name", "customer adress", "delivered"]
 				@array.each do |meal_or_customer_or_order|
-					if @klass == "Customer"
-						csv << [meal_or_customer_or_order.id, meal_or_customer_or_order.name, meal_or_customer_or_order.adress]
-					elsif @klass == "Meal"
 						csv << [meal_or_customer_or_order.id, meal_or_customer_or_order.name, meal_or_customer_or_order.price]
-					else
+				end
+			else
+				csv << ["id", "meal", "employee name", "customer name", "customer adress", "delivered"]
+				@array.each do |meal_or_customer_or_order|
 						csv << [meal_or_customer_or_order.id, meal_or_customer_or_order.meal, meal_or_customer_or_order.employee_name, meal_or_customer_or_order.customer_name, meal_or_customer_or_order.customer_adress, meal_or_customer_or_order.delivered]
-					end
 				end
 			end
 		end
